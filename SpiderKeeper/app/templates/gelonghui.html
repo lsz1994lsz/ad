@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SpiderKeeper</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/static/css/skins/skin-black-light.min.css">
+    <!--custom css-->
+    <link rel="stylesheet" href="/static/css/app.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <a href="/" class="logo">
+{#            <span class="logo-mini"><b>S</b>K</span>#}
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Spider</b>Keeper</span>
+    </a>
+
+    <form action="/project/gelonghui/ssh" method="post">
+        <div class="form-group">
+            <label>Url</label>
+            <input type="text" name="url" class='form-control' placeholder="请输入网址" />
+        </div>
+        <div class="form-group">
+            <label>Time</label>
+            <input type="text" name="time" class='form-control' placeholder="请输入次数" />
+        </div>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class='form-control' placeholder="请输入标题" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
+    <div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Running Jobs</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th style="width: 10px">#</th>
+                <th style="width: 160px">Spider</th>
+                <th style="width: 160px">Title</th>
+                <th style="width: 200px">Url</th>
+                <th style="width: 50px">Time</th>
+                <th style="width: 40px">Runtime</th>
+                <th style="width: 120px">Started</th>
+                <th style="width: 40px">Running On</th>
+                <th style="width: 40px">Action</th>
+            </tr>
+            {% for job in gelonghui_running %}
+            <tr>
+                <td>{{ job.job_execution_id }}</td>
+                <td>{{ job.spider_name }}</td>
+                <td>{{ job.title }}</td>
+                <td>{{ job.url }}</td>
+                <td>{{ job.time }}</td>
+                <td>{{ timedelta(now,job.date_created) }}</td>
+                <td>{{ job.date_created }}</td>
+                <td style="font-size: 10px;">{{ job.running_on }}</td>
+                <td>
+                    <a href="/gelonghui/{{ job.id }}/stop"><span
+                            class="label label-danger">Stop</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+    <!-- jQuery 2.2.3 -->
+    <script src="/static/js/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="/static/js/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/static/js/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/js/AdminLTE.min.js"></script>
+    <!-- AdminLTE for my purposes -->
+    <script src="/static/js/input_url_time_gelonghui.js"></script>
+</body>
+</html>

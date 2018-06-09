@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content_header %}
+<h1>Server Stats</h1>
+{% endblock %}
+{% block content_body %}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Server Stats</h3>
+    </div>
+    <div class="box-body">
+    </div>
+    <div class="box-footer text-black">
+        <div class="row">
+            {% for server in servers %}
+            <div class="col-sm-12">
+                <!-- Progress bars -->
+{#                {% if server == 'http://101.37.29.42:6800' %}#}
+{#                    <div class="clearfix">#}
+{#                        <span class="pull-left">{{ server }}</span>#}
+{#                        <span class="pull-right">{{ mem_info }}</span>#}
+{#                    </div>#}
+{#                    <div class="progress">#}
+{#                        <div class="progress-bar progress-bar-green" style="width: 100%;"></div>#}
+{#                    </div>#}
+                    <div class="clearfix">
+                        <span class="pull-left">{{ server }}</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-green" style="width: 100%;"></div>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

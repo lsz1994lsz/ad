@@ -1,17 +1,24 @@
+# -*- coding: utf-8 -*-
 import random
 import re
-
-
 import requests
 import time
 
-time1 = time.time()
-i = 0
-while i < 9000:
-    txt4 = requests.get('http://www.gelonghui.com/api/post/149231?random=0.14984706231519218')
-    i += 1
-    print i
-    z = re.findall('read" :(.*?),', txt4.content)
-    time.sleep(random.uniform(0.01, 0.2))
-    print z
-print time.time() - time1
+def get():
+    view = 0
+    while view < 48555:
+        try:
+            url = 'http://www.gelonghui.com/p/165535.html'
+            rep = url.replace('/p/', '/api/post/').replace('.html', '').replace('.htm', '').replace('column/article/','api/columnArticle/getByPostId?postId=')
+            txt = requests.get(rep, timeout=1)
+            if "www.gelonghui.com" in url:
+                view = int(re.findall('read" :(.*?),', txt.content)[0].replace(' ', ''))
+            if "m.gelonghui.com" in url:
+                view = int(re.findall('<span class="read-count">阅读 (.*?)</span>', txt.content)[0].replace(' ', ''))
+
+        except Exception, e:
+            print e
+        # time.sleep(random.uniform(0.01, 0.1))
+        print view
+get()
+

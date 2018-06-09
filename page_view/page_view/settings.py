@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 
 # Scrapy settings for page_view project
 #
@@ -6,7 +7,8 @@
 # default. All the other settings are documented here:
 #
 #     http://doc.scrapy.org/en/latest/topics/settings.html
-
+# TELNETCONSOLE_PORT = 12342
+# WEBSERVICE_PORT =54321
 # ==============日志相关=================
 # 自定义的日志，默认为ERROR，可用级别为：CRITICAL，ERROR，WARNING，INFO，DEBUG
 CUSTOM_LOG_LEVEL = ['ERROR','INFO']
@@ -30,8 +32,6 @@ NEWSPIDER_MODULE = 'page_view.spiders'
 #     'market_flow.pipelines.MarketFlowPipeline': 200
 # }
 # ======================
-URL = "http://caifuhao.eastmoney.com/news/20171016104959495955690"
-RUN_TIME = 20000
 
 # ==================模拟真实===========================
 #取消默认的useragent,使用新的useragent
@@ -41,7 +41,8 @@ DOWNLOADER_MIDDLEWARES = {
 }
 # 代理的开关
 ENABLE_PROXY = True
-GET_PROXY_URL = "http://www.xdaili.cn/ipagent/greatRecharge/getGreatIp?spiderId=fa88b90f2a194d7cbd76b89795a2ee66&orderno=YZ2017815605yJ6Xxz&returnType=1&count=1"
+# GET_PROXY_URL = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=fa88b90f2a194d7cbd76b89795a2ee66&orderno=YZ201711130979IgJh8F&returnType=2&count=1"
+GET_PROXY_URL = "http://piping.mogumiao.com/proxy/api/get_ip_al?appKey=43e587fdddc74d1c80cf5c92afd40116&count=1&expiryDate=0&format=1&newLine=2"
 
 # ===================OSS==============================
 # SPIDER_MIDDLEWARES = {
@@ -70,7 +71,7 @@ LOGSTATS_INTERVAL = 120
 # DOWNLOAD_TIMEOUT = 3
 
 #对IP多少并发线程
-CONCURRENT_REQUESTS_PER_IP = 5
+CONCURRENT_REQUESTS_PER_IP = 2
 
 
 

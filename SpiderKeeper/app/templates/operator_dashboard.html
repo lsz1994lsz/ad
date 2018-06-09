@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SpiderKeeper</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/static/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/static/css/skins/skin-black-light.min.css">
+    <!--custom css-->
+    <link rel="stylesheet" href="/static/css/app.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-black-light sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <div class="logo">
+            <span class="logo-mini"><b>S</b>K</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Spider</b>Keeper</span>
+        </div>
+{#        <a href="/" class="logo">#}
+{#            <span class="logo-mini"><b>S</b>K</span>#}
+{#            <!-- logo for regular state and mobile devices -->#}
+{#            <span class="logo-lg"><b>Spider</b>Keeper</span>#}
+{#        </a>#}
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+
+            <ul class="nav navbar-nav nav-xs">
+                <li style="width: 50px;float: left;">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </li>
+            {% for server in server_list %}
+                {% if server == 'http://121.40.77.248:6800' %}
+                    <li class="dropdown" style="float: left;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           style="padding-top: 15px;padding-bottom: 15px;">
+                                <span>{{ '运营刷量' }}</span>
+                        </a>
+                        <ul class="dropdown-menu" data-server="{{ server }}" data-index_of_servers="{{ loop.index0 }}">
+                            {% for project in project_list_of_servers[server] %}
+                            <li><a href="/project/{{ project.id }}">{{ project.project_name }}</a></li>
+                            {% endfor %}
+    {#                        <li role="separator" class="divider"></li>#}
+    {#                        <li><a href="#" data-toggle="modal" data-target="#project-create-modal" class="create-project">#}
+    {#                            Create Project</a>#}
+    {#                        </li>#}
+                        </ul>
+                    </li>
+{#                <li class="dropdown" style="float: left;">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"#}
+{#                       style="padding-top: 15px;padding-bottom: 15px;">#}
+{#                        {% if server != 'http://121.40.77.248:6800' %}#}
+{#                            <span>{{ server }}</span>#}
+{#                        {% else %}#}
+{#                            <span>{{ '运营刷量' }} ({{ server }})</span>#}
+{#                        {% else %}#}
+{#                            <span>{{ '运营刷量' }}</span>#}
+{#                        {% endif %}#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu" data-server="{{ server }}" data-index_of_servers="{{ loop.index0 }}">#}
+{#                        {% for project in project_list_of_servers[server] %}#}
+{#                        <li><a href="/project/{{ project.id }}">{{ project.project_name }}</a></li>#}
+{#                        {% endfor %}#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#" data-toggle="modal" data-target="#project-create-modal" class="create-project">#}
+{#                            Create Project</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </li>#}
+                {% endif %}
+            {% endfor %}
+{#                <li class="dropdown" style="float: left;">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"#}
+{#                       style="padding-top: 15px;padding-bottom: 15px;">#}
+{#                        <span>测试服务器121.40.77.248(运营刷量)</span>#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        {% for project in project_list %}#}
+{#                        <li><a href="/project/{{ project.id }}">{{ project.project_name }}</a></li>#}
+{#                        {% endfor %}#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#" data-toggle="modal" data-target="#project-create-modal">Create Project</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#                <li class="dropdown" style="float: left;">#}
+{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"#}
+{#                       style="padding-top: 15px;padding-bottom: 15px;">#}
+{#                        <span>Hello</span>#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu">#}
+{#                        {% for project in project_list %}#}
+{#                        <li><a href="/project/{{ project.id }}">{{ project.project_name }}</a></li>#}
+{#                        {% endfor %}#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#" data-toggle="modal" data-target="#project-create-modal">Create Project</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </li>#}
+            </ul>
+
+        </nav>
+    </header>
+
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <div style="position: relative;width: 100%;padding: 10px;overflow: hidden;height: 35px;">
+                <div style="padding: 5px 5px 5px 15px;line-height: 1;position: absolute;left: 65px;">
+                    <p><b>{{ project.project_name }}</b></p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                  <li><a href="/project/gelonghui"><i class="fa fa-dashboard text-blue"></i> <span>官网刷量</span></a></li>
+{#                <li class="header">任务</li>#}
+{#                <li><a href="/project/{{ project.id }}/job/dashboard"><i#}
+{#                        class="fa fa-dashboard text-blue"></i>#}
+{#                    <span>指示板</span></a></li>#}
+{#                <li><a href="/project/{{ project.id }}/job/periodic"><i class="fa fa-tasks text-green"></i>#}
+{#                    <span>周期性任务</span></a></li>#}
+{#                <li class="header">爬虫</li>#}
+{#                <li><a href="/project/{{ project.id }}/spider/dashboard"><i class="fa fa-flask text-red"></i>#}
+{#                    <span>指示板</span></a>#}
+{#                </li>#}
+{#                <li><a href="/project/{{ project.id }}/spider/deploy"><i class="fa fa-server text-orange"></i>#}
+{#                    <span>部署</span></a></li>#}
+                <!--<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Settings</span></a></li>-->
+{#                <li class="header">项目</li>#}
+{#                <li><a href="/project/{{ project.id }}/project/stats"><i class="fa  fa-area-chart text-gray"></i> <span>运行状况</span></a>#}
+{#                </li>#}
+                <!--<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Members</span></a></li>-->
+{#                <li><a href="/project/manage"><i class="fa fa-gears text-red"></i> <span>管理项目</span></a></li>#}
+{#                <li class="header">服务器</li>#}
+{#                <li><a href="/project/{{ project.id }}/server/stats"><i class="fa fa-bolt text-red"></i> <span>使用情况</span></a>#}
+{#                </li>#}
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Job Dashboard</h1>
+                <ol style="float: right;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    font-size: 12px;
+                    padding: 7px 5px;
+                    position: absolute;
+                    top: 15px;
+                    right: 10px;">
+                    <button type="button" id='btn_run' class="btn btn-success btn-flat" style="margin-top: -10px;" data-toggle="modal"
+                            data-target="#job-run-modal">RunOnce
+                    </button>
+                </ol>
+{#            {% block content_header %}{% endblock %}#}
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+                    <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Next Jobs</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th style="width: 30px">Job</th>
+                        <th style="width: 160px">Spider</th>
+        {#                <th style="width: 100px">Args</th>#}
+                        <th style="width: 160px">Title</th>
+                        <th style="width: 200px">Url</th>
+                        <th style="width: 50px">Time</th>
+                        <th style="width: 40px">Priority</th>
+                        <th style="width: 40px">Running On</th>
+                        <th style="width: 160px">Wait</th>
+                    </tr>
+                    {% for job in job_status.PENDING %}
+                    {% if job.job_instance %}
+                    <tr>
+                        <td>{{ job.job_execution_id }}</td>
+                        <td><a href="/project/1/job/periodic#{{ job.job_instance_id }}">{{ job.job_instance_id }}</a></td>
+                        <td>{{ job.job_instance.spider_name }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.spider_arguments }}">{{ job.job_instance.spider_arguments }}#}
+        {#                </td>#}
+                        <td>{{ job.job_instance.title }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.title }}">{{ job.job_instance.title }}#}
+        {#                </td>#}
+                        <td class="txt-args" data-toggle="tooltip" data-placement="right"
+                            title="{{ job.job_instance.url }}">{{ job.job_instance.url }}
+                        </td>
+                        <td>{{ job.job_instance.time }}</td>
+                        {% if job.job_instance.priority == -1 %}
+                        <td>
+                            <span class="label label-default">LOW</span>
+                        </td>
+                        {% elif job.job_instance.priority == 0 %}
+                        <td>
+                            <span class="label label-info">NORMAL</span>
+                        </td>
+                        {% elif job.job_instance.priority == 1 %}
+                        <td>
+                            <span class="label label-warning">HIGH</span>
+                        </td>
+                        {% elif job.job_instance.priority == 2 %}
+                        <td>
+                            <span class="label label-danger">HIGHEST</span>
+                        </td>
+                        {% endif %}
+                        <td style="font-size: 10px;">{{ job.running_on }}</td>
+                        <td>{{ timedelta(now,job.create_time) }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <!--======running job======-->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Running Jobs</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th style="width: 30px">Job</th>
+                        <th style="width: 160px">Spider</th>
+        {#                <th style="width: 100px">Args</th>#}
+                        <th style="width: 160px">Title</th>
+                        <th style="width: 200px">Url</th>
+                        <th style="width: 50px">Time</th>
+                        <th style="width: 20px">Priority</th>
+                        <th style="width: 40px">Runtime</th>
+                        <th style="width: 120px">Started</th>
+                        <th style="width: 40px">Log</th>
+                        <th style="width: 40px">Running On</th>
+                        <th style="width: 40px">Action</th>
+                    </tr>
+                    {% for job in job_status.RUNNING %}
+                    {% if job.job_instance %}
+                    <tr>
+                        <td>{{ job.job_execution_id }}</td>
+                        <td><a href="/project/1/job/periodic#{{ job.job_instance_id }}">{{ job.job_instance_id }}</a></td>
+                        <td>{{ job.job_instance.spider_name }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.spider_arguments }}">{{ job.job_instance.spider_arguments }}#}
+        {#                </td>#}
+                        <td>{{ job.job_instance.title }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.title }}">{{ job.job_instance.title }}#}
+        {#                </td>#}
+                        <td class="txt-args" data-toggle="tooltip" data-placement="right"
+                            title="{{ job.job_instance.url }}">{{ job.job_instance.url }}
+                        </td>
+                        <td>{{ job.job_instance.time }}</td>
+                        {% if job.job_instance.priority == -1 %}
+                        <td>
+                            <span class="label label-default">LOW</span>
+                        </td>
+                        {% elif job.job_instance.priority == 0 %}
+                        <td>
+                            <span class="label label-info">NORMAL</span>
+                        </td>
+                        {% elif job.job_instance.priority == 1 %}
+                        <td>
+                            <span class="label label-warning">HIGH</span>
+                        </td>
+                        {% elif job.job_instance.priority == 2 %}
+                        <td>
+                            <span class="label label-danger">HIGHEST</span>
+                        </td>
+                        {% endif %}
+                        <td>{{ timedelta(now,job.start_time) }}</td>
+                        <td>{{ job.start_time }}</td>
+                        <td><a href="/project/{{ project.id }}/jobexecs/{{ job.job_execution_id }}/log" target="_blank"
+                               data-toggle="tooltip" data-placement="top" title="{{ job.service_job_execution_id }}">Log</a>
+                        </td>
+                        <td style="font-size: 10px;">{{ job.running_on }}</td>
+                        <td>
+                            <a href="/project/{{ project.id }}/jobexecs/{{ job.job_execution_id }}/stop"><span
+                                    class="label label-danger">Stop</span></a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <!--======completed job======-->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Completed Jobs</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th style="width: 30px">Job</th>
+                        <th style="width: 160px">Spider</th>
+        {#                <th style="width: 100px">Args</th>#}
+                        <th style="width: 160px">Title</th>
+                        <th style="width: 200px">Url</th>
+                        <th style="width: 50px">Time</th>
+                        <th style="width: 20px">Priority</th>
+                        <th style="width: 40px">Runtime</th>
+                        <th style="width: 120px">Started</th>
+                        <th style="width: 40px">Running On</th>
+                        <th style="width: 10px">Log</th>
+                        <th style="width: 10px">Status</th>
+                    </tr>
+                    {% for job in job_status.COMPLETED %}
+                    {% if job.job_instance %}
+                    <tr>
+                        <td>{{ job.job_execution_id }}</td>
+                        <td><a href="/project/1/job/periodic#{{ job.job_instance_id }}">{{ job.job_instance_id }}</a></td>
+                        <td>{{ job.job_instance.spider_name }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.spider_arguments }}">{{ job.job_instance.spider_arguments }}#}
+        {#                </td>#}
+                        <td>{{ job.job_instance.title }}</td>
+        {#                <td class="txt-args" data-toggle="tooltip" data-placement="right"#}
+        {#                    title="{{ job.job_instance.title }}">{{ job.job_instance.title }}#}
+        {#                </td>#}
+                        <td class="txt-args" data-toggle="tooltip" data-placement="right"
+                            title="{{ job.job_instance.url }}">{{ job.job_instance.url }}
+                        </td>
+                        <td>{{ job.job_instance.time }}</td>
+                        {% if job.job_instance.priority == -1 %}
+                        <td>
+                            <span class="label label-default">LOW</span>
+                        </td>
+                        {% elif job.job_instance.priority == 0 %}
+                        <td>
+                            <span class="label label-info">NORMAL</span>
+                        </td>
+                        {% elif job.job_instance.priority == 1 %}
+                        <td>
+                            <span class="label label-warning">HIGH</span>
+                        </td>
+                        {% elif job.job_instance.priority == 2 %}
+                        <td>
+                            <span class="label label-danger">HIGHEST</span>
+                        </td>
+                        {% endif %}
+                        <td>{{ timedelta(job.end_time,job.start_time) }}</td>
+                        <td>{{ job.start_time }}</td>
+                        <td style="font-size: 10px;">{{ job.running_on }}</td>
+                        <td><a href="/project/{{ project.id }}/jobexecs/{{ job.job_execution_id }}/log" target="_blank"
+                               data-toggle="tooltip" data-placement="top" title="{{ job.service_job_execution_id }}">Log</a>
+                        </td>
+                        {% if job.running_status == 2 %}
+                        <td>
+                            <span class="label label-success">FINISHED</span>
+                        </td>
+                        {% else %}
+                        <td>
+                            <span class="label label-danger">CANCELED</span>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" role="dialog" id="job-run-modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="/project/{{ project.id }}/job/add" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Run Spider Once</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Spider</label>
+                                <select class="form-control" name="spider_name">
+                                    {% for spider in spider_list %}
+                                    <option value="{{ spider.spider_name }}">{{ spider.spider_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Priority</label>
+                                <select class="form-control" name="priority">
+                                    <option label="Low" value="number:-1">Low</option>
+                                    <option label="Normal" value="0" selected="selected">Normal</option>
+                                    <option label="High" value="1">High</option>
+                                    <option label="Highest" value="2">Highest</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+        {#                        <label>Args</label>#}
+        {#                        <input type="text" name="spider_arguments" class="form-control" placeholder="foo=1,bar=2">#}
+                                <label>Url</label>
+                                <input type="text" name="url" class="form-control" placeholder="请输入网址">
+                                <label>Time</label>
+                                <input type="text" name="time" class="form-control" placeholder="请输入次数">
+                                <label>Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="请输入标题">
+                            </div>
+                            <div class="form-group">
+                                <label>Choose Server</label>
+                                <select class="form-control" name="scrapyd_server_index">
+                                    <option value="{{ index_of_servers }}">{{ scrapyd_server }}</option>
+        {#                            {% for scrapyd_server in scrapyd_servers %}#}
+        {#                            <option value="{{ loop.index - 1 }}">{{ scrapyd_server }}</option>#}
+        {#                            {% endfor %}#}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="daemon" value="auto">
+{#                                <label>Choose Daemon</label>#}
+{#                                <select class="form-control" name="daemon">#}
+{#                                    <option value="auto">auto</option>#}
+        {#                            {% for server in servers %}#}
+        {#                            <option value="{{ server }}">{{ server }}</option>#}
+        {#                            {% endfor %}#}
+{#                                </select>#}
+                            </div>
+                            <input type="hidden" name="run_type" value="onetime">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" id="btn" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+{#            {% block content_body %}{% endblock %}#}
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+{#        <div class="pull-right hidden-xs">#}
+{#            <b>Version</b> 1.2.0#}
+{#        </div>#}
+{#        <strong><a href="https://github.com/DormyMo/SpiderKeeper">SpiderKeeper</a>.</strong>#}
+    </footer>
+
+    <div class="modal fade" role="dialog" id="project-create-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/project/create" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Create Project</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="project-name">Project Name</label>
+                            <input type="text" name="project_name" id="project-name" class="form-control"
+                                   placeholder="Project Name">
+                            <input id="server" type="hidden" name="server">
+                            <input id="index_of_servers" type="hidden" name="index_of_servers">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="/static/js/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/static/js/bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="/static/js/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/static/js/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/js/AdminLTE.min.js"></script>
+<!-- AdminLTE for my purposes -->
+<script src="/static/js/my.js"></script>
+<script src="/static/js/time_limit.js"></script>
+<script src="/static/js/input_url_time.js"></script>
+<script src="/static/js/total_time_and_total_running.js"></script>
+{#{% block script %}{% endblock %}#}
+</body>
+</html>
+
+
+
