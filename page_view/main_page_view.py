@@ -9,7 +9,7 @@ import os
 
 
 # cmdline.execute("scrapy crawl page_view -a url=http://caifuhao.eastmoney.com/news/20171215113353335314930 -a time=21001".split())
-cmdline.execute("scrapy crawl page_view -a url=http://caifuhao.eastmoney.com/news/20180516173510351014630 -a time=22000".split())
+cmdline.execute("scrapy crawl page_view -a url=http://ad.gelonghui.com/log?adid=appload86&adlink=https://passport.futu5.com/sem/qqad?channel=241&subchannel=1 -a time=10000".split())
 import sys
 
 # str = sys.argv[1]

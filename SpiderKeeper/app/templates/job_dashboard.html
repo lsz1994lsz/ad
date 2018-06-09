@@ -252,7 +252,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Spider</label>
-                        <select class="form-control" name="spider_name" id="boldStuff">
+                        <select class="form-control" name="spider_name">
                             {% for spider in spider_list %}
                             <option value="{{ spider.spider_name }}">{{ spider.spider_name }}</option>
                             {% endfor %}
@@ -267,31 +267,34 @@
                             <option label="Highest" value="2">Highest</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <div id ="url_pa">
+{#                        <label>Args</label>#}
+{#                        <input type="text" name="spider_arguments" class="form-control" placeholder="foo=1,bar=2">#}
                         <label>Url</label>
                         <input type="text" name="url" class="form-control" placeholder="请输入网址">
-                        </div>
-                        <div id = "time_pa">
                         <label>Time</label>
                         <input type="text" name="time" class="form-control" placeholder="请输入次数">
-                        </div>
-                        <div id = "title_pa">
                         <label>Title</label>
                         <input type="text" name="title" class="form-control" placeholder="请输入标题">
-                        </div>
                     </div>
-
                     <div class="form-group">
                         <label>Choose Server</label>
                         <select class="form-control" name="scrapyd_server_index">
                             <option value="{{ index_of_servers }}">{{ scrapyd_server }}</option>
+{#                            {% for scrapyd_server in scrapyd_servers %}#}
+{#                            <option value="{{ loop.index - 1 }}">{{ scrapyd_server }}</option>#}
+{#                            {% endfor %}#}
                         </select>
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="daemon" value="auto">
-
+{#                        <label>Choose Daemon</label>#}
+{#                        <select class="form-control" name="daemon">#}
+{#                            <option value="auto">auto</option>#}
+{#                            {% for server in servers %}#}
+{#                            <option value="{{ server }}">{{ server }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
                     </div>
                     <input type="hidden" name="run_type" value="onetime">
                 </div>
@@ -307,16 +310,41 @@
 </div>
 <!-- /.modal -->
 {% endblock %}
-
+{#{% block script %}#}
+{#    <script>#}
+{#         $.ajax('/user/allusers', {#}
+{##}
+{#            success: function (data) {#}
+{#                console.log(200);#}
+{#            },#}
+{##}
+{#            error: function (jqXHR, textStatus, err) {#}
+{##}
+{#                // jqXHR: jQuery增强的xhr#}
+{#                // textStatus: 请求完成状态#}
+{#                // err: 底层通过throw抛出的异常对象，值与错误类型有关#}
+{#                console.log(arguments);#}
+{#            },#}
+{##}
+{#            complete: function (jqXHR, textStatus) {#}
+{#                // jqXHR: jQuery增强的xhr#}
+{#                // textStatus: 请求完成状态 success | error#}
+{#                console.log('statusCode: %d, statusText: %s', jqXHR.status, jqXHR.statusText);#}
+{#                console.log('textStatus: %s', textStatus);#}
+{#            },#}
+{##}
+{#            statusCode: {#}
+{#                '403': function (jqXHR, textStatus, err) {#}
+{#                    console.log(403);  //注意：后端模拟errror方式：HttpResponse.status_code=500#}
+{##}
+{#                },#}
+{#                '400': function () {#}
+{#                }#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
 {% block script %}
 {#<script src="/static/js/input_url_time.js"></script>#}
 {#<script src="/static/js/total_time_and_total_running.js"></script>#}
-<script type="text/javascript">
-var ht = document.getElementById('boldStuff').value;
-if (ht != "page_view") {
-    $("#url_pa").remove();
-    $("#time_pa").remove();
-    $("#title_pa").remove();
-}
-</script>
 {% endblock %}

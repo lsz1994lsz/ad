@@ -68,7 +68,7 @@ class PageViewSpider(CrawlSpider):
         start_url_request_list = []
         i = 1
 
-        while i <= int(self.RUN_TIME)*1.25:
+        while i <= int(self.RUN_TIME)*1.5:
             url = self.URL
 
             start_request = Request(url, callback=self.parse,dont_filter=True)#,headers={'Referer': 'http://www.example.com/'}),headers = self.headers不断开和关
@@ -81,40 +81,44 @@ class PageViewSpider(CrawlSpider):
     def parse(self, response):
         sel = Selector(response)
         print response.url
+        print response.status
         # print response.body
+        self.i += 1
 
+        if int(self.i) > int(self.RUN_TIME):
+            raise CloseSpider('完成  ' + str(self.i) + '  ' + response.url)
         # 财富
-        if "caifuhao.eastmoney.com" in response.url:
-            readcount = sel.xpath('//*[@id="readcount"]/text()')
-            self.judge_pv(readcount, response.url)
-        # 财富移动版
-        if "emcreative.eastmoney.com" in response.url:
-            readcount = sel.xpath('//html/body/div[2]/div[2]/p/text()')
-            self.judge_pv(readcount, response.url)
-        # 中金
-        elif "mp.cnfol.com" in response.url:
-            readcount = sel.xpath('//html/body/div[3]/div[1]/div[3]/div/div[1]/span[2]/text()')
-            self.judge_pv(readcount ,response.url)
-        # 格隆汇网页
-        elif "www.gelonghui.com" in response.url:
-            readcount = sel.xpath('//*[@id="content"]/div/div/div[1]/div[1]/div[2]/p[2]/span[1]/em[1]/text()')
-            self.judge_pv(readcount, response.url)
-        # 格隆汇移动版
-        elif "m.gelonghui.com" in response.url:
-            readcount = sel.xpath('/html/body/section/div[1]/div[1]/span/text()')
-            self.judge_pv(readcount, response.url)
-        # 格隆汇column/article/
-        elif "www.gelonghui.com" in response.url:
-            readcount = sel.xpath('//*[@id="main"]/div[2]/div[1]/span[2]/text()')
-            self.judge_pv(readcount, response.url)
-        # 搜狐
-        elif "www.sohu.com" in response.url:
-            readcount = sel.xpath('//*[@id="article-container"]/div[2]/div[1]/div[3]/div[1]/span/em/text()')
-            self.judge_pv(readcount, response.url)
-        # 搜狐移动版
-        elif "m.sohu.com" in response.url:
-            readcount = sel.xpath('//html/body/div[3]/div[3]/article/div/span/em/text()')
-            self.judge_pv(readcount, response.url)
+        # if "caifuhao.eastmoney.com" in response.url:
+        #     readcount = sel.xpath('//*[@id="readcount"]/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 财富移动版
+        # if "emcreative.eastmoney.com" in response.url:
+        #     readcount = sel.xpath('//html/body/div[2]/div[2]/p/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 中金
+        # elif "mp.cnfol.com" in response.url:
+        #     readcount = sel.xpath('//html/body/div[3]/div[1]/div[3]/div/div[1]/span[2]/text()')
+        #     self.judge_pv(readcount ,response.url)
+        # # 格隆汇网页
+        # elif "www.gelonghui.com" in response.url:
+        #     readcount = sel.xpath('//*[@id="content"]/div/div/div[1]/div[1]/div[2]/p[2]/span[1]/em[1]/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 格隆汇移动版
+        # elif "m.gelonghui.com" in response.url:
+        #     readcount = sel.xpath('/html/body/section/div[1]/div[1]/span/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 格隆汇column/article/
+        # elif "www.gelonghui.com" in response.url:
+        #     readcount = sel.xpath('//*[@id="main"]/div[2]/div[1]/span[2]/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 搜狐
+        # elif "www.sohu.com" in response.url:
+        #     readcount = sel.xpath('//*[@id="article-container"]/div[2]/div[1]/div[3]/div[1]/span/em/text()')
+        #     self.judge_pv(readcount, response.url)
+        # # 搜狐移动版
+        # elif "m.sohu.com" in response.url:
+        #     readcount = sel.xpath('//html/body/div[3]/div[3]/article/div/span/em/text()')
+        #     self.judge_pv(readcount, response.url)
 
         # yield Request(url=response.url,callback=self.parse,dont_filter=True)
         # yield Request(url, dont_filter=True, headers=self.headers)

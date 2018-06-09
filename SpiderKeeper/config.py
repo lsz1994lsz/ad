@@ -53,7 +53,7 @@ SERVER_TYPE = 'scrapyd'
 server = ['http://localhost:6800', 'http://121.40.77.248:6800', 'http://114.215.177.242:6800',
           'http://47.91.166.8:6800']
 if "win" in sys.platform:
-    SERVERS = ['http://localhost:6800']
+    SERVERS = server
     # SERVERS = server[1:]
 
 else:

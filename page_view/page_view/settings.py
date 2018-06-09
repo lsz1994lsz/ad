@@ -41,9 +41,8 @@ DOWNLOADER_MIDDLEWARES = {
 }
 # 代理的开关
 ENABLE_PROXY = True
-# GET_PROXY_URL = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=fa88b90f2a194d7cbd76b89795a2ee66&orderno=YZ201711130979IgJh8F&returnType=2&count=1"
-GET_PROXY_URL = "http://piping.mogumiao.com/proxy/api/get_ip_al?appKey=43e587fdddc74d1c80cf5c92afd40116&count=1&expiryDate=0&format=1&newLine=2"
-
+# GET_PROXY_URL = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=fa88b90f2a194d7cbd76b89795a2ee66&orderno=YZ20183269134K4cfzN&returnType=2&count=1"
+GET_PROXY_URL = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=fa88b90f2a194d7cbd76b89795a2ee66&orderno=YZ20183275585Twltjd&returnType=2&count=1"
 # ===================OSS==============================
 # SPIDER_MIDDLEWARES = {
 #     'oss_middlewares.OSSMiddleWares':150,
@@ -71,7 +70,7 @@ LOGSTATS_INTERVAL = 120
 # DOWNLOAD_TIMEOUT = 3
 
 #对IP多少并发线程
-CONCURRENT_REQUESTS_PER_IP = 2
+CONCURRENT_REQUESTS_PER_IP = 1
 
 
 

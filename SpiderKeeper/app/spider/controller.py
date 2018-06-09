@@ -685,16 +685,41 @@ def job_add(project_id):
     job_instance.running_on = project.server
 
     pattern_time = '^[1-9]{1}\d{0,5}$'
-    url_time = request.form.get('time',"1")
-    print url_time,type(url_time),"**************"
+    url_time = request.form.get('time')
     time_result = re.match(pattern_time, url_time)
     if time_result is None:
         abort(403, u'time格式错误')
+        # return redirect(request.referrer)
 
+    # try:
+    #     url_time = int(request.form.get('time'))
+    # except ValueError:
+    #     # abort(403, u'time必须全为数字且不能为空')
+    #     return redirect(request.referrer)
+    # if url_time <= 0:
+    #     # abort(403, u'time不能小于零')
+    #     return redirect(request.referrer)
+    # if request.form['time'][0] == '0':
+    #     # abort(403, u'time不能为零开头')
+    #     return redirect(request.referrer)
+    # if '.' in request.form['time']:
+    #     # abort(403, u'time不能为有小数点')
+    #     return redirect(request.referrer)
 
-    url = request.form.get('url',"None")
-
-    if job_instance.spider_name == 'page_view':
+    url = request.form.get('url')
+    # url_of_caifu = ['http://caifuhao.eastmoney.com', 'https://caifuhao.eastmoney.com',
+    #                 'http://emcreative.eastmoney.com', 'https://emcreative.eastmoney.com']
+    # url_of_sohu = ['http://www.sohu.com', 'https://www.sohu.com', 'http://m.sohu.com', 'https://m.sohu.com']
+    # url_of_gelonghui = ['http://www.gelonghui.com', 'http://www.gelonghui.com',
+    #                     'http://gelonghui.com', 'https://gelonghui.com',
+    #                     'http://m.gelonghui.com', 'https://m.gelonghui.com']
+    # url_of_zhongjin = ['http://mp.cnfol.com', 'https://mp.cnfol.com']
+    # url_prefix = tuple(['None'] + url_of_caifu + url_of_sohu + url_of_gelonghui + url_of_zhongjin)
+    # if not request.form['url'].startswith(url_prefix):
+    #     abort(403, u'url前缀不在规定范围内')
+    # if ' ' in request.form['url'].strip():
+    #     abort(403, u'url中间不能有空格')
+    if int(project_id) == 1:
 
         pattern_sohu = '^(https://)www.sohu.com/a/\d{9}_\d{6}\s*$'
         pattern_sohu_1 = '^(http://)www.sohu.com/a/\d{9}_\d{6}\s*$'
@@ -705,15 +730,19 @@ def job_add(project_id):
         url_result = re.match(pattern, url)
         if url_result is None:
             abort(403, u'url不在规定范围内')
+            # return redirect(request.referrer)
 
         total_time_in_mysql = JobExecution.total_time_of_running_and_pending(project_id)
+        # print 'total_time_in_mysql', total_time_in_mysql
         total_time = total_time_in_mysql + int(request.form['time'])
+        # print 'total_time', total_time
         if total_time > 100000:
             abort(403, u'刷量总数不能超过十万')
+            # return redirect(request.referrer)
 
     job_instance.url = url.strip()
     job_instance.time = int(url_time)
-    job_instance.title = request.form.get('title',"None")
+    job_instance.title = request.form['title']
     job_instance.priority = request.form.get('priority', 0)
     job_instance.run_type = request.form['run_type']
 
@@ -735,8 +764,8 @@ def job_add(project_id):
         cron_instance.spider_name = request.form['spider_name']
         cron_instance.project_id = project_id
         cron_instance.running_on = project.server
-        cron_instance.url = request.form.get('url',"None").strip()
-        cron_instance.time = int(request.form.get('time',"1").strip())
+        cron_instance.url = request.form['url'].strip()
+        cron_instance.time = int(request.form['time'].strip())
         cron_instance.title = request.form['title']
         cron_instance.priority = request.form.get('priority', 0)
         cron_instance.run_type = request.form['run_type']
